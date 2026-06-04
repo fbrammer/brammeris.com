@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#222"/>
+
+  <!-- "BIS" Text -->
+  <text x="32" y="44" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#7eb3d4">BIS</text>
+
+  <!-- Red accent line underneath -->
+  <line x1="12" y1="50" x2="52" y2="50" stroke="#ff6b7a" stroke-width="2"/>
+</svg>
