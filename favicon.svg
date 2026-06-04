@@ -2,8 +2,11 @@
   <!-- Background -->
   <rect width="64" height="64" fill="#222"/>
 
-  <!-- "BIS" Text -->
-  <text x="32" y="44" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#7eb3d4">BIS</text>
+  <!-- "B" in blue -->
+  <text x="16" y="44" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#7eb3d4">B</text>
+
+  <!-- "IS" in red -->
+  <text x="40" y="44" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#ff6b7a">IS</text>
 
   <!-- Red accent line underneath -->
   <line x1="12" y1="50" x2="52" y2="50" stroke="#ff6b7a" stroke-width="2"/>
