@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Talk - BrammerIS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #e0e0e0;
+            line-height: 1.6;
+            background: #1a1a1a;
+        }
+
+        header {
+            background: #222;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7eb3d4;
+        }
+
+        .logo-accent {
+            color: #ff6b7a;
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #ff6b7a;
+        }
+
+        .contact-section {
+            padding: 50px 0;
+            background: #222;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #7eb3d4;
+        }
+
+        .intro {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #b0b0b0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b7a;
+            box-shadow: 0 0 0 3px rgba(255, 107, 122, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #ff6b7a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #ff4d5a;
+        }
+
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: #1d4d2d;
+            color: #7cdf9e;
+            border: 1px solid #2d6b3d;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #222;
+            padding: 40px 0;
+            text-align: center;
+            color: #909090;
+            font-size: 14px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+
+        /* Light mode overrides */
+        @media (prefers-color-scheme: light) {
+            body {
+                color: #333;
+                background: #f5f5f5;
+            }
+
+            header {
+                background: white;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .logo {
+                color: #1a4d7a;
+            }
+
+            .logo-accent {
+                color: #c41e3a;
+            }
+
+            nav a {
+                color: #333;
+            }
+
+            nav a:hover {
+                color: #c41e3a;
+            }
+
+            .contact-section {
+                background: white;
+            }
+
+            h1 {
+                color: #1a4d7a;
+            }
+
+            .intro {
+                color: #666;
+            }
+
+            label {
+                color: #333;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                border: 1px solid #ddd;
+                background: white;
+                color: #333;
+            }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            textarea:focus {
+                border-color: #c41e3a;
+                box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+            }
+
+            button {
+                background: #c41e3a;
+            }
+
+            button:hover {
+                background: #a01830;
+            }
+
+            .success-message {
+                background: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+
+            footer {
+                background: white;
+                color: #666;
+                border-top: 1px solid #e0e0e0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Brammer<span class="logo-accent">IS</span></div>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/about.html">About</a>
+                    <a href="/contact.html">Let's Talk</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <div class="container">
+                <h1>Let's talk about your business</h1>
+                <p class="intro">
+                    Tell us a bit about what you do, what's on your mind, or what challenges you're facing. We'll read what you send and get back to you.
+                </p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tell us about your business</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit">Send</button>
+                    <div class="success-message" id="successMessage">
+                        Thanks for reaching out. We'll be in touch soon.
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BrammerIS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            // Send to Formspree (replace with your Formspree endpoint)
+            fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('contactForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                } else {
+                    alert('There was an error sending your message. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
