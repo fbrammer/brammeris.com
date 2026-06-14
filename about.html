@@ -5,195 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - BrammerIS</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            color: #e0e0e0;
-            line-height: 1.6;
-            background: #1a1a1a;
-        }
-
-        header {
-            background: #222;
-            padding: 20px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 600;
-            color: #7eb3d4;
-        }
-
-        .logo-accent {
-            color: #ff6b7a;
-        }
-
-        nav a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: #b0b0b0;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            color: #ff6b7a;
-        }
-
-        .about-section {
-            padding: 50px 0;
-            background: #222;
-        }
-
-        h1 {
-            font-size: 40px;
-            margin-bottom: 30px;
-            color: #7eb3d4;
-        }
-
-        .about-text {
-            font-size: 16px;
-            color: #b0b0b0;
-            line-height: 1.8;
-            max-width: 700px;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-        }
-
-        .cta {
-            margin-top: 40px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 16px 40px;
-            background: #ff6b7a;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .cta-button:hover {
-            background: #ff4d5a;
-        }
-
-        footer {
-            background: #222;
-            padding: 40px 0;
-            text-align: center;
-            color: #909090;
-            font-size: 14px;
-            border-top: 1px solid #333;
-            margin-top: 40px;
-        }
-
-        .legal {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid #333;
-            font-size: 13px;
-            color: #707070;
-        }
-
-        /* Light mode overrides */
-        @media (prefers-color-scheme: light) {
-            body {
-                color: #333;
-                background: #f5f5f5;
-            }
-
-            header {
-                background: white;
-                border-bottom: 1px solid #e0e0e0;
-            }
-
-            .logo {
-                color: #1a4d7a;
-            }
-
-            .logo-accent {
-                color: #c41e3a;
-            }
-
-            nav a {
-                color: #333;
-            }
-
-            nav a:hover {
-                color: #c41e3a;
-            }
-
-            .about-section {
-                background: white;
-            }
-
-            h1 {
-                color: #1a4d7a;
-            }
-
-            .about-text {
-                color: #555;
-            }
-
-            .cta-button {
-                background: #c41e3a;
-            }
-
-            .cta-button:hover {
-                background: #a01830;
-            }
-
-            footer {
-                background: white;
-                color: #666;
-                border-top: 1px solid #e0e0e0;
-            }
-
-            .legal {
-                border-top: 1px solid #e0e0e0;
-                color: #999;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
-
-            nav a {
-                display: block;
-                margin: 10px 0;
-            }
-
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <header>
@@ -212,22 +24,14 @@
     <main>
         <section class="about-section">
             <div class="container">
-                <h1>About</h1>
+                <h1 class="page-title">About</h1>
                 <div class="about-text">
-                    <p>
-                        I'm Frank Brammer. I've worked with businesses of all sizes, but I specialize in small to medium-sized operations—understanding their challenges, exploring what's possible, and building solutions that actually work for their specific situation.
-                    </p>
-                    <p>
-                        BrammerIS exists because I believe most small business owners are doing good work but are held back by problems that shouldn't be there. Not because they're bad operators—but because they're juggling too much. The systems that worked at one size don't scale. Manual processes that made sense at first become anchors.
-                    </p>
-                    <p>
-                        I focus on finding and solving those problems. Sometimes it's about streamlining operations. Sometimes it's about capturing revenue you're currently leaving on the table. Often it's both—and it all starts with understanding your business inside and out.
-                    </p>
-                    <p>
-                        I'm not here to sell you a product or a service. I'm here to help where I can make a real difference for your business. If we think we can help, we'll tell you what that looks like. If we can't, I'll tell you that too.
-                    </p>
+                    <p>I'm Frank Brammer. I've worked with businesses of all sizes, but I specialize in small to medium-sized operations—understanding their challenges, exploring what's possible, and building solutions that actually work for their specific situation.</p>
+                    <p>BrammerIS exists because I believe most small business owners are doing good work but are held back by problems that shouldn't be there. Not because they're bad operators—but because they're juggling too much. The systems that worked at one size don't scale. Manual processes that made sense at first become anchors.</p>
+                    <p>I focus on finding and solving those problems. Sometimes it's about streamlining operations with custom software. Often, it's about introducing practical AI and automation to eliminate manual bottlenecks, capture missed revenue, or scale your impact without scaling your headcount—and it all starts with understanding your business inside and out.</p>
+                    <p>I'm not here to sell you a product or a service. I'm here to help where I can make a real difference for your business. If we think we can help, we'll tell you what that looks like. If we can't, I'll tell you that too.</p>
 
-                    <div class="cta">
+                    <div style="margin-top: 40px;">
                         <a href="./contact.html" class="cta-button">Let's talk</a>
                     </div>
 
