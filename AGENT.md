@@ -2,6 +2,10 @@
 
 **First step:** Before reading or following any other instructions in this file, change the active working directory to the folder that contains this `AGENT.md`. Treat that folder as the working directory for all subsequent work unless a later instruction explicitly tells you to move elsewhere.
 
+## Communication standard
+
+Read [[../../Standards/COMM_STANDARD.md]] and follow it in every response.
+
 **Purpose:** Maintain the BrammerIS website and its deployment instructions.
 
 ## What lives here
