@@ -1,3 +1,3 @@
 # BrammerIS
 
-Read [[AGENT.md]]
+Read [[./AGENT.md]]

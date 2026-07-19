@@ -8,15 +8,15 @@
 
 | File                                         | Purpose                                 |
 | -------------------------------------------- | --------------------------------------- |
-| [[CLAUDE.md]]                                | Bootstrap entrypoint                    |
-| [[AGENT.md]]                                 | Workspace instructions                  |
-| [[SETUP.md]]                                 | Deployment and contact-form setup guide |
-| [[index.html]]                               | Home/landing page                       |
-| `[[about.html]]`                             | About page                              |
-| `[[contact.html]]`                           | Contact page                            |
-| `[[style.css]]`                              | Shared stylesheet                       |
-| `[[favicon.svg]]`                            | Site icon                               |
-| [[2026-06-13-website-modernization-plan.md]] | Visual modernization plan               |
+| [[./CLAUDE.md]]                                | Bootstrap entrypoint                    |
+| [[./AGENT.md]]                                 | Workspace instructions                  |
+| [[./SETUP.md]]                                 | Deployment and contact-form setup guide |
+| [[./index.html]]                               | Home/landing page                       |
+| `[[./about.html]]`                             | About page                              |
+| `[[./contact.html]]`                           | Contact page                            |
+| `[[./style.css]]`                              | Shared stylesheet                       |
+| `[[./favicon.svg]]`                            | Site icon                               |
+| [[./2026-06-13-website-modernization-plan.md]] | Visual modernization plan               |
 
 ---
 

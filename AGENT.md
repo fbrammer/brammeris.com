@@ -14,12 +14,12 @@ Read [[../../Standards/COMM_STANDARD.md]] and follow it in every response.
 - `contact.html` — contact form page
 - `style.css` — shared styling
 - `favicon.svg` — site icon
-- [[SETUP.md]] — deployment and contact-form setup guide
-- [[2026-06-13-website-modernization-plan.md]] — planning note for the current visual refresh
+- [[./SETUP.md]] — deployment and contact-form setup guide
+- [[./2026-06-13-website-modernization-plan.md]] — planning note for the current visual refresh
 
 ## How to work here
-1. Read [[ROUTING.md]] to find the relevant file.
-2. Read [[SETUP.md]] before making deployment-related changes.
+1. Read [[./ROUTING.md]] to find the relevant file.
+2. Read [[./SETUP.md]] before making deployment-related changes.
 3. Keep content updates aligned with the business positioning in the site copy.
 4. Review changes locally before any push or publish step.
 5. Prefer simple, maintainable HTML/CSS changes over new dependencies.
