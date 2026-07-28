@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Get Started — Your AI Assistant</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .step { margin-bottom: 2.5rem; }
+        .step h3 { margin-bottom: 0.5rem; }
+        .step-num {
+            display: inline-block;
+            width: 1.8rem; height: 1.8rem;
+            line-height: 1.8rem;
+            text-align: center;
+            border-radius: 50%;
+            background: var(--accent, #c0392b);
+            color: #fff;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #e8e8e8;
+            padding: 0.9rem 1.1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.92rem;
+            margin: 0.75rem 0;
+        }
+        code { font-family: "SF Mono", Menlo, Consolas, monospace; }
+        .os-toggle { margin: 1rem 0; }
+        .os-toggle button {
+            padding: 0.5rem 1.2rem;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .os-toggle button.active { background: #2c3e50; color: #fff; border-color: #2c3e50; }
+        .os-block { display: none; }
+        .os-block.active { display: block; }
+        .callout {
+            background: #fff8e1;
+            border-left: 4px solid #f1c40f;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        .handoff-box {
+            background: #eef6ff;
+            border: 1px solid #b8d9f7;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Let's get your AI assistant set up</h1>
+                <p class="tagline">This takes about 10 minutes. No technical background needed — just follow along and copy/paste exactly what's shown. Once you get to the last step, your new assistant takes over and walks you through everything else itself.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+
+                <div class="os-toggle">
+                    <strong>Which computer are you on?</strong><br>
+                    <button id="btn-mac" class="active" onclick="showOS('mac')">Mac</button>
+                    <button id="btn-win" onclick="showOS('win')">Windows</button>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">1</span>Create a free GitHub account</h3>
+                    <p>Go to <a href="https://github.com" target="_blank" rel="noopener">github.com</a> and sign up — just a username, email, and password, no payment info required. Verify your email if GitHub asks you to.</p>
+                    <p>You won't need to actually use this site yourself. It's just a one-time account your assistant uses behind the scenes to install and update itself.</p>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">2</span>Open a terminal</h3>
+                    <div class="os-block active" id="os-mac-2">
+                        <p>Press <code>Cmd + Space</code>, type <strong>Terminal</strong>, press Enter.</p>
+                    </div>
+                    <div class="os-block" id="os-win-2">
+                        <p>Click the Start menu, type <strong>PowerShell</strong>, press Enter.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">3</span>Tell it who you are</h3>
+                    <p>Copy each line below, paste it into the window you just opened, and press Enter. Replace the name and email with your own (use the same email as your new GitHub account).</p>
+                    <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your-github-email@example.com"</code></pre>
+                    <p><strong>Check it worked:</strong> paste this and confirm your name/email print back:</p>
+                    <pre><code>git config --global user.name
+git config --global user.email</code></pre>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">4</span>Install your assistant</h3>
+                    <div class="os-block active" id="os-mac-4">
+                        <p>Paste this and press Enter:</p>
+                        <pre><code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></pre>
+                        <p>Then close and reopen Terminal completely (not just a new tab) so it picks up the new command.</p>
+                        <div class="callout">If it asks for your password to install with elevated permissions ("sudo"), stop and don't enter it — the normal installer doesn't need that. Something's wrong; make a note and come back to it.</div>
+                    </div>
+                    <div class="os-block" id="os-win-4">
+                        <p>Paste this and press Enter:</p>
+                        <pre><code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code></pre>
+                        <div class="callout">If PowerShell blocks this with an "execution policy" error, close and reopen PowerShell and try again. If it still fails, make a note and come back to it rather than changing security settings.</div>
+                        <p>Then close and reopen PowerShell completely so it picks up the new command.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">5</span>Check it's healthy</h3>
+                    <p>In the same window, paste:</p>
+                    <pre><code>hermes doctor</code></pre>
+                    <p>It should report a healthy install with nothing missing. If it doesn't, don't continue — whatever it flags needs fixing first (it usually tells you exactly what to do).</p>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">6</span>Hand off to your assistant</h3>
+                    <p>This is the last manual step. From here, your assistant walks you through everything else itself — connecting a free AI provider, memory settings, and finishing up.</p>
+                    <p>Paste this and press Enter:</p>
+                    <pre><code>hermes</code></pre>
+                    <p>Once it starts, paste this exact message and send it:</p>
+                    <div class="handoff-box">
+                        <pre style="white-space: pre-wrap;"><code>Please fetch and read this document: https://raw.githubusercontent.com/fbrammer/familyai-hermes-template/main/onboarding-wizard.md — it's an onboarding wizard for setting you up. I've already completed sections 0-2 myself (GitHub account, git identity, and installing you). Please start at section 3 and walk me through the rest, one step at a time, exactly as written.</code></pre>
+                    </div>
+                    <p>From this point on, just follow along with whatever it asks.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showOS(os) {
+            document.getElementById('btn-mac').classList.toggle('active', os === 'mac');
+            document.getElementById('btn-win').classList.toggle('active', os === 'win');
+            document.querySelectorAll('.os-block').forEach(el => {
+                el.classList.toggle('active', el.id.includes('-' + os + '-'));
+            });
+        }
+    </script>
+</body>
+</html>
