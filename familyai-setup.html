@@ -94,6 +94,36 @@
             cursor: pointer;
         }
         .copy-btn:hover { background: #3a3a3a; }
+        .provider-block {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin: 1.2rem 0;
+        }
+        .provider-block h4 { margin: 0 0 0.4rem 0; }
+        .yn-toggle { margin: 0.6rem 0; }
+        .yn-toggle button {
+            padding: 0.4rem 1.1rem;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .yn-toggle button.active { background: #2c3e50; color: #fff; border-color: #2c3e50; }
+        .yn-block { display: none; margin-top: 0.6rem; }
+        .yn-block.active { display: block; }
+        .key-input-row { margin: 0.5rem 0; }
+        .key-input-row input {
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 420px;
+            font-family: "SF Mono", Menlo, Consolas, monospace;
+        }
     </style>
 </head>
 <body>
@@ -143,13 +173,92 @@
                     </div>
                     <pre><code id="git-command-text">git config --global user.name "Your Name"
 git config --global user.email "your-github-email@example.com"</code></pre>
-                    <p><strong>Check it worked:</strong> paste this and confirm your name/email print back:</p>
+                    <p><strong>Check it worked:</strong> paste this and press Enter:</p>
                     <pre><code>git config --global user.name
 git config --global user.email</code></pre>
+                    <p>You should see it print back, on two lines: <span id="git-verify-expected"><code>Your Name</code> and <code>your-github-email@example.com</code></span> (or whatever you entered above).</p>
                 </div>
 
                 <div class="step">
-                    <h3><span class="step-num">4</span>Install your assistant</h3>
+                    <h3><span class="step-num">4</span>Set up your AI providers</h3>
+                    <p>Your assistant needs at least one AI provider to actually think and respond — think of it like the engine under the hood. We're going to set up a couple of options now, before installing anything, so everything's ready to go the moment your assistant starts up.</p>
+                    <p><strong>Why more than one?</strong> Free AI providers are genuinely good, but any single one can occasionally be slow, down, or rate-limited. Having a few set up means your assistant can quietly switch to another one and keep working — you'll basically never notice a hiccup. We'll also suggest adding $10 in credit to the free ones: you're very unlikely to actually spend any of it (free models stay free), but having any billing history on the account makes the free tier much more reliable and far less likely to get rate-limited.</p>
+
+                    <div class="provider-block">
+                        <h4>OpenAI (ChatGPT)</h4>
+                        <p>Do you already have an OpenAI / ChatGPT account?</p>
+                        <div class="yn-toggle">
+                            <button id="btn-openai-yes" onclick="showYN('openai','yes')">Yes</button>
+                            <button id="btn-openai-no" onclick="showYN('openai','no')">No</button>
+                        </div>
+                        <div class="yn-block" id="openai-yes">
+                            <p>Great — nothing to do here yet. Once your assistant is installed, it'll walk you through connecting that account for real (that step needs a live login, so it happens then, not now).</p>
+                        </div>
+                        <div class="yn-block" id="openai-no">
+                            <p>That's completely fine — free models will work as backups, but they're not quite dependable enough to be your main, everyday model. For that, we'd recommend a ChatGPT Plus subscription ($20/month, cancel anytime with no penalty — plenty of people set it up, use it a month or two, and cancel, no hassle).</p>
+                            <p>If you'd like to set that up now:</p>
+                            <ol>
+                                <li>Go to <a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a> and sign up for a free account (email + password).</li>
+                                <li>Once you're signed in, look for an "Upgrade to Plus" option — usually in the bottom-left corner or a settings menu. Did you find it?</li>
+                                <li>Go ahead and subscribe if you'd like to. You'll need a payment method — that's normal, and remember you can cancel any time from the same menu.</li>
+                            </ol>
+                            <p>Either way — subscribed or not — that's all for OpenAI right now. The actual connection to your assistant happens in a later step, right after it's installed, with a real login screen it'll walk you through live.</p>
+                        </div>
+                    </div>
+
+                    <div class="provider-block">
+                        <h4>NVIDIA</h4>
+                        <p>This one's a free account with a real API key — no subscription, no OAuth login, just a password-like code we'll paste in below. Want to set it up?</p>
+                        <div class="yn-toggle">
+                            <button id="btn-nvidia-yes" onclick="showYN('nvidia','yes')">Yes</button>
+                            <button id="btn-nvidia-no" onclick="showYN('nvidia','no')">No</button>
+                        </div>
+                        <div class="yn-block" id="nvidia-yes">
+                            <ol>
+                                <li>Go to <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a> and sign up for a free account.</li>
+                                <li>Find and generate an API key (usually under your account/profile settings).</li>
+                                <li>Optional: add $10 in credit if the site offers it — see the reliability note above.</li>
+                                <li>Paste your key here:
+                                    <div class="key-input-row">
+                                        <input type="text" id="key-nvidia" placeholder="nvapi-..." oninput="updateKeyCommand('nvidia', 'NVIDIA_API_KEY')">
+                                    </div>
+                                </li>
+                            </ol>
+                            <p>Don't worry about doing anything with it yet — we'll use it a little later, once your assistant is installed.</p>
+                        </div>
+                        <div class="yn-block" id="nvidia-no">
+                            <p>No problem — you can always add this later. Moving on.</p>
+                        </div>
+                    </div>
+
+                    <div class="provider-block">
+                        <h4>OpenRouter</h4>
+                        <p>Same idea as NVIDIA — a free account with an API key, no subscription needed. Want to set it up?</p>
+                        <div class="yn-toggle">
+                            <button id="btn-openrouter-yes" onclick="showYN('openrouter','yes')">Yes</button>
+                            <button id="btn-openrouter-no" onclick="showYN('openrouter','no')">No</button>
+                        </div>
+                        <div class="yn-block" id="openrouter-yes">
+                            <ol>
+                                <li>Go to <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> and sign up for a free account.</li>
+                                <li>Generate an API key from your account settings.</li>
+                                <li>Optional: add $10 in credit — same reliability note as above.</li>
+                                <li>Paste your key here:
+                                    <div class="key-input-row">
+                                        <input type="text" id="key-openrouter" placeholder="sk-or-..." oninput="updateKeyCommand('openrouter', 'OPENROUTER_API_KEY')">
+                                    </div>
+                                </li>
+                            </ol>
+                            <p>Same as NVIDIA — nothing more to do with it right now. We'll use it a little later.</p>
+                        </div>
+                        <div class="yn-block" id="openrouter-no">
+                            <p>No problem — you can always add this later. Moving on.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3><span class="step-num">5</span>Install your assistant</h3>
                     <div class="os-block active" id="os-mac-4">
                         <p>Paste this and press Enter:</p>
                         <pre><code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></pre>
@@ -165,20 +274,31 @@ git config --global user.email</code></pre>
                 </div>
 
                 <div class="step">
-                    <h3><span class="step-num">5</span>Check it's healthy</h3>
+                    <h3><span class="step-num">6</span>Check it's healthy</h3>
                     <p>In the same window, paste:</p>
                     <pre><code>hermes doctor</code></pre>
                     <p>It should report a healthy install with nothing missing. If it doesn't, don't continue — whatever it flags needs fixing first (it usually tells you exactly what to do).</p>
                 </div>
 
+                <div class="step" id="apply-keys-step">
+                    <h3><span class="step-num">7</span>Apply your provider keys</h3>
+                    <p id="apply-keys-empty">You didn't enter any keys back in step 4 — nothing to do here, skip ahead to the next step. (You can always add a provider later; just ask your assistant once it's set up.)</p>
+                    <div id="apply-keys-present" style="display:none;">
+                        <p>Now that your assistant is installed, paste these in the same window to save the keys you entered in step 4. This runs directly in your terminal, never through a chat message, so your keys stay private and out of any conversation history.</p>
+                        <pre><code id="apply-keys-text"></code></pre>
+                        <p><strong>Verify:</strong> paste this and confirm it prints something back (not blank) for each key you set:</p>
+                        <pre><code id="apply-keys-verify-text"></code></pre>
+                    </div>
+                </div>
+
                 <div class="step">
-                    <h3><span class="step-num">6</span>Meet your assistant</h3>
+                    <h3><span class="step-num">8</span>Meet your assistant</h3>
                     <p>This is the last step you do on your own. Starting right now, you're handing off to your new AI assistant — everything from here is between the two of you: it'll finish setting itself up, you'll get to decide who it is and how it works, and you'll get to know each other with a few things to try together. You don't need to know anything technical from this point on — just follow along and talk to it like you would a person.</p>
                     <p>Paste this and press Enter:</p>
                     <pre><code>hermes</code></pre>
                     <p>Once it starts, paste this exact message and send it:</p>
                     <div class="handoff-box">
-                        <pre style="white-space: pre-wrap;"><code>Please fetch and read this document: https://raw.githubusercontent.com/fbrammer/familyai-hermes-template/main/onboarding-wizard.md — it's an onboarding wizard for setting you up. I've already completed sections 0-2 myself (GitHub account, git identity, and installing you). Please start at section 3 and walk me through the rest, one step at a time, exactly as written.</code></pre>
+                        <pre style="white-space: pre-wrap;"><code>Please fetch and read this document: https://raw.githubusercontent.com/fbrammer/familyai-hermes-template/main/onboarding-wizard.md — it's an onboarding wizard for setting you up. I've already completed sections 0-2 myself: created a GitHub account, set my git identity, installed you, and already saved API keys for any of NVIDIA/OpenRouter I chose to set up (skip re-doing those, just verify they work). Please start at section 3 and walk me through the rest, one step at a time, exactly as written.</code></pre>
                     </div>
                     <p>From this point on, just follow along with whatever it asks.</p>
                 </div>
@@ -204,6 +324,44 @@ git config --global user.email</code></pre>
             const email = (rawEmail || 'your-github-email@example.com').replace(/"/g, '');
             document.getElementById('git-command-text').textContent =
                 `git config --global user.name "${name}"\ngit config --global user.email "${email}"`;
+            document.getElementById('git-verify-expected').innerHTML =
+                `<code>${name}</code> and <code>${email}</code>`;
+        }
+
+        function showYN(provider, choice) {
+            document.getElementById(`btn-${provider}-yes`).classList.toggle('active', choice === 'yes');
+            document.getElementById(`btn-${provider}-no`).classList.toggle('active', choice === 'no');
+            document.getElementById(`${provider}-yes`).classList.toggle('active', choice === 'yes');
+            document.getElementById(`${provider}-no`).classList.toggle('active', choice === 'no');
+        }
+
+        const providerKeys = {}; // envVarName -> raw key value, populated as the user pastes them in
+
+        function updateKeyCommand(provider, envVar) {
+            const value = document.getElementById(`key-${provider}`).value.trim();
+            if (value) {
+                providerKeys[envVar] = value;
+            } else {
+                delete providerKeys[envVar];
+            }
+            renderApplyKeysStep();
+        }
+
+        function renderApplyKeysStep() {
+            const envVars = Object.keys(providerKeys);
+            const emptyEl = document.getElementById('apply-keys-empty');
+            const presentEl = document.getElementById('apply-keys-present');
+            if (envVars.length === 0) {
+                emptyEl.style.display = 'block';
+                presentEl.style.display = 'none';
+                return;
+            }
+            emptyEl.style.display = 'none';
+            presentEl.style.display = 'block';
+            const setLines = envVars.map(v => `hermes config set ${v} ${providerKeys[v]}`).join('\n');
+            const verifyLines = envVars.map(v => `hermes config get ${v}`).join('\n');
+            document.getElementById('apply-keys-text').textContent = setLines;
+            document.getElementById('apply-keys-verify-text').textContent = verifyLines;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
