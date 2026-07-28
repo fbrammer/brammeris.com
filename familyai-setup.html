@@ -59,6 +59,41 @@
             padding: 1.2rem;
             margin-top: 1rem;
         }
+        .name-email-inputs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 0.9rem 0;
+        }
+        .name-email-inputs label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            font-weight: 600;
+            gap: 0.3rem;
+        }
+        .name-email-inputs input {
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            min-width: 240px;
+            font-weight: normal;
+        }
+        .copy-wrap { position: relative; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+            border: 1px solid #555;
+            background: #2c2c2c;
+            color: #e8e8e8;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-btn:hover { background: #3a3a3a; }
     </style>
 </head>
 <body>
@@ -97,8 +132,16 @@
 
                 <div class="step">
                     <h3><span class="step-num">3</span>Tell it who you are</h3>
-                    <p>Copy each line below, paste it into the window you just opened, and press Enter. Replace the name and email with your own (use the same email as your new GitHub account).</p>
-                    <pre><code>git config --global user.name "Your Name"
+                    <p>Enter your name and the email you used for your new GitHub account — the commands below will fill themselves in as you type. Then copy the result, paste it into the window you just opened, and press Enter.</p>
+                    <div class="name-email-inputs">
+                        <label>Your name
+                            <input type="text" id="git-name" placeholder="Jane Smith" oninput="updateGitCommand()">
+                        </label>
+                        <label>Your GitHub email
+                            <input type="email" id="git-email" placeholder="jane@example.com" oninput="updateGitCommand()">
+                        </label>
+                    </div>
+                    <pre><code id="git-command-text">git config --global user.name "Your Name"
 git config --global user.email "your-github-email@example.com"</code></pre>
                     <p><strong>Check it worked:</strong> paste this and confirm your name/email print back:</p>
                     <pre><code>git config --global user.name
@@ -129,8 +172,8 @@ git config --global user.email</code></pre>
                 </div>
 
                 <div class="step">
-                    <h3><span class="step-num">6</span>Hand off to your assistant</h3>
-                    <p>This is the last manual step. From here, your assistant walks you through everything else itself — connecting a free AI provider, memory settings, and finishing up.</p>
+                    <h3><span class="step-num">6</span>Meet your assistant</h3>
+                    <p>This is the last step you do on your own. Starting right now, you're handing off to your new AI assistant — everything from here is between the two of you: it'll finish setting itself up, you'll get to decide who it is and how it works, and you'll get to know each other with a few things to try together. You don't need to know anything technical from this point on — just follow along and talk to it like you would a person.</p>
                     <p>Paste this and press Enter:</p>
                     <pre><code>hermes</code></pre>
                     <p>Once it starts, paste this exact message and send it:</p>
@@ -152,6 +195,37 @@ git config --global user.email</code></pre>
                 el.classList.toggle('active', el.id.includes('-' + os + '-'));
             });
         }
+
+        function updateGitCommand() {
+            const rawName = document.getElementById('git-name').value.trim();
+            const rawEmail = document.getElementById('git-email').value.trim();
+            // Strip double quotes so a stray one in someone's name can't break the shell command.
+            const name = (rawName || 'Your Name').replace(/"/g, '');
+            const email = (rawEmail || 'your-github-email@example.com').replace(/"/g, '');
+            document.getElementById('git-command-text').textContent =
+                `git config --global user.name "${name}"\ngit config --global user.email "${email}"`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre').forEach(pre => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                const btn = document.createElement('button');
+                btn.textContent = 'Copy';
+                btn.type = 'button';
+                btn.className = 'copy-btn';
+                btn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(pre.textContent).then(() => {
+                        btn.textContent = 'Copied!';
+                        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+                    });
+                });
+                wrapper.appendChild(btn);
+            });
+        });
     </script>
 </body>
 </html>
