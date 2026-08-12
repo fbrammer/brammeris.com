@@ -276,6 +276,20 @@ git config --global user.email</code></pre>
                         <div class="callout">If PowerShell blocks this with an "execution policy" error, close and reopen PowerShell and try again. If it still fails, make a note and come back to it rather than changing security settings.</div>
                         <p>Then close and reopen PowerShell completely so it picks up the new command.</p>
                     </div>
+                    <div class="callout">Partway through, this presents its own setup screens. Answer these now:
+                        <ul>
+                            <li><strong>Screen 1</strong> — three options: "Quick Setup (Nous Portal)", "Full Setup", "Blank Slate." Pick <strong>Full Setup</strong>. The other two either lock you into one company's AI service or turn off features you'll want later, like memory and scheduling.</li>
+                            <li><strong>Screen 2 — "Select Provider."</strong> Pick whichever service you already set up back in step 4. If you set up ChatGPT Plus and it then asks "OpenAI Codex" vs. "OpenAI API," pick <strong>Codex</strong> (that's the one tied to your subscription) — it'll open a browser login, then ask which model; pick <strong>gpt-5.4-mini</strong>.</li>
+                            <li><strong>Screen 3 — "Select Terminal Backend."</strong> Keep the default, <strong>Local</strong>.</li>
+                            <li><strong>Screen 4</strong> — a Slack/Discord/iMessage-style setup screen. Press <strong>Esc</strong> to skip it entirely — that's a separate decision for later.</li>
+                            <li><strong>Screen 5 — "Tools for CLI."</strong> Accept the preselected defaults.</li>
+                            <li><strong>Screen 6 — "Browser."</strong> Pick <strong>Local Browser</strong>.</li>
+                            <li><strong>Screen 7</strong> — another, unlabeled provider choice (likely the image/vision slot). Pick whichever provider you already authenticated at Screen 2. If it then asks for a model tier, accept the default ("medium").</li>
+                            <li><strong>Screen 8 — "TTS."</strong> Keep the recommended default, <strong>Microsoft Edge TTS</strong>.</li>
+                            <li><strong>Screen 9</strong> — search provider. Pick <strong>DuckDuckGo</strong> (free, no API key needed). If you didn't set up a paid subscription but did enter an OpenRouter or NVIDIA key in step 4, pick that one instead. If you haven't set anything up yet, pick OpenRouter — you'll finish that account in a later step regardless.</li>
+                        </ul>
+                        None of these choices are permanent — later steps (handled by your assistant) fill in every provider you set up as a fallback, regardless of what's picked here.
+                    </div>
                 </div>
 
                 <div class="step">
@@ -301,21 +315,7 @@ git config --global user.email</code></pre>
                     <p>This is the last step you do on your own. Starting right now, you're handing off to your new AI assistant — everything from here is between the two of you: it'll finish setting itself up, you'll get to decide who it is and how it works, and you'll get to know each other with a few things to try together. You don't need to know anything technical from this point on — just follow along and talk to it like you would a person.</p>
                     <p>Paste this and press Enter:</p>
                     <pre><code>hermes</code></pre>
-                    <div class="callout">Before you get a normal chat prompt, Hermes shows its own first-run setup screens. Answer these first — the handoff message below comes <strong>after</strong> they're done, not instead of them:
-                        <ul>
-                            <li><strong>Screen 1</strong> — three options: "Quick Setup (Nous Portal)", "Full Setup", "Blank Slate." Pick <strong>Full Setup</strong>. The other two either lock you into one company's AI service or turn off features you'll want later, like memory and scheduling.</li>
-                            <li><strong>Screen 2 — "Select Provider."</strong> Pick whichever service you already set up back in step 4. If you set up ChatGPT Plus and it then asks "OpenAI Codex" vs. "OpenAI API," pick <strong>Codex</strong> (that's the one tied to your subscription) — it'll open a browser login, then ask which model; pick <strong>gpt-5.4-mini</strong>.</li>
-                            <li><strong>Screen 3 — "Select Terminal Backend."</strong> Keep the default, <strong>Local</strong>.</li>
-                            <li><strong>Screen 4</strong> — a Slack/Discord/iMessage-style setup screen. Press <strong>Esc</strong> to skip it entirely — that's a separate decision for later.</li>
-                            <li><strong>Screen 5 — "Tools for CLI."</strong> Accept the preselected defaults.</li>
-                            <li><strong>Screen 6 — "Browser."</strong> Pick <strong>Local Browser</strong>.</li>
-                            <li><strong>Screen 7</strong> — another, unlabeled provider choice (likely the image/vision slot). Pick whichever provider you already authenticated at Screen 2. If it then asks for a model tier, accept the default ("medium").</li>
-                            <li><strong>Screen 8 — "TTS."</strong> Keep the recommended default, <strong>Microsoft Edge TTS</strong>.</li>
-                            <li><strong>Screen 9</strong> — search provider. Pick <strong>DuckDuckGo</strong> (free, no API key needed). If you didn't set up a paid subscription but did enter an OpenRouter or NVIDIA key in step 4, pick that one instead. If you haven't set anything up yet, pick OpenRouter — you'll finish that account in a later step regardless.</li>
-                        </ul>
-                        None of these choices are permanent — later steps (handled by your assistant) fill in every provider you set up as a fallback, regardless of what's picked here.
-                    </div>
-                    <p>Once it finishes those screens and you get a normal chat prompt, paste this exact message and send it:</p>
+                    <p>Once you get a normal chat prompt, paste this exact message and send it:</p>
                     <div class="handoff-box">
                         <pre style="white-space: pre-wrap;"><code>Please fetch and read this document: https://raw.githubusercontent.com/fbrammer/familyai-hermes-template/main/onboarding-wizard.md — it's an onboarding wizard for setting you up. I've already completed sections 0-2 myself: created a GitHub account, set my git identity, installed you, and already saved API keys for any of NVIDIA/OpenRouter I chose to set up (skip re-doing those, just verify they work). Please start at section 3 and walk me through the rest, one step at a time, exactly as written.</code></pre>
                     </div>
