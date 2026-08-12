@@ -51,6 +51,11 @@
             margin: 1rem 0;
             font-size: 0.95rem;
         }
+        .callout-warn {
+            background: #fdecea;
+            color: #611a15;
+            border-left: 4px solid #e74c3c;
+        }
         .handoff-box {
             background: #eef6ff;
             color: #14314d;
@@ -268,7 +273,7 @@ git config --global user.email</code></pre>
                         <p>Paste this and press Enter:</p>
                         <pre><code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></pre>
                         <p>Then close and reopen Terminal completely (not just a new tab) so it picks up the new command.</p>
-                        <div class="callout">If it asks for your password to install with elevated permissions ("sudo"), stop and don't enter it — the normal installer doesn't need that. Something's wrong; make a note and come back to it.</div>
+                        <div class="callout callout-warn">If it asks for your password to install with elevated permissions ("sudo"), stop and don't enter it — the normal installer doesn't need that. Something's wrong; make a note and come back to it.</div>
                     </div>
                     <div class="os-block" id="os-win-4">
                         <p>Paste this and press Enter:</p>
