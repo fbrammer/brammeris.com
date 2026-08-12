@@ -162,6 +162,11 @@
 
                 <div class="step">
                     <h3><span class="step-num">3</span>Tell it who you are</h3>
+                    <div class="os-block active" id="os-mac-3-pre">
+                        <p>First, paste this and press Enter:</p>
+                        <pre><code>xcode-select --install</code></pre>
+                        <div class="callout">This may pop up a window mentioning "Xcode" — don't worry, you are <strong>not</strong> installing the full Xcode app (that's a many-gigabyte program for writing software). It's asking for one small separate piece called "Command Line Tools," a few hundred MB, which is just the plumbing your assistant needs to talk to GitHub. Click <strong>Install</strong> in that popup and wait for it to finish (a few minutes, it'll show a progress bar) before continuing to the next command below. If nothing pops up, that just means it's already installed — go ahead and continue.</div>
+                    </div>
                     <p>Enter your name and the email you used for your new GitHub account — the commands below will fill themselves in as you type. Then copy the result, paste it into the window you just opened, and press Enter.</p>
                     <div class="name-email-inputs">
                         <label>Your name
@@ -173,9 +178,6 @@
                     </div>
                     <pre><code id="git-command-text">git config --global user.name "Your Name"
 git config --global user.email "your-github-email@example.com"</code></pre>
-                    <div class="os-block active" id="os-mac-3">
-                        <div class="callout">On a Mac, this first command sometimes triggers a popup mentioning "Xcode" — don't worry, you are <strong>not</strong> installing the full Xcode app (that's a many-gigabyte program for writing software). It's asking for one small separate piece called "Command Line Tools," a few hundred MB, which is just the plumbing your assistant needs to talk to GitHub. Click <strong>Install</strong> in that popup and wait for it to finish (a few minutes, it'll show a progress bar). Once it's done, paste the same command above again — it'll go through cleanly the second time.</div>
-                    </div>
                     <p><strong>Check it worked:</strong> paste this and press Enter:</p>
                     <pre><code>git config --global user.name
 git config --global user.email</code></pre>
