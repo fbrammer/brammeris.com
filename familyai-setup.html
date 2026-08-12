@@ -281,15 +281,17 @@ git config --global user.email</code></pre>
                         <div class="callout">If PowerShell blocks this with an "execution policy" error, close and reopen PowerShell and try again. If it still fails, make a note and come back to it rather than changing security settings.</div>
                         <p>Then close and reopen PowerShell completely so it picks up the new command.</p>
                     </div>
-                    <div class="callout">Partway through, this presents its own setup screens. Answer these now:
+                    <div class="callout">Partway through, this presents its own setup screens.</div>
+                    <div class="callout">These screens are a text-based menu, not a normal window — you won't be able to click with your mouse. Use the <strong>up/down arrow keys</strong> to move between options, and press <strong>Enter</strong> to select whichever one you're on.</div>
+                    <div class="callout">Answer these now:
                         <ul>
                             <li><strong>Screen 1</strong> — three options: "Quick Setup (Nous Portal)", "Full Setup", "Blank Slate." Pick <strong>Full Setup</strong>. The other two either lock you into one company's AI service or turn off features you'll want later, like memory and scheduling.</li>
-                            <li><strong>Screen 2 — "Select Provider."</strong> Pick whichever service you already set up back in step 4. If you set up ChatGPT Plus and it then asks "OpenAI Codex" vs. "OpenAI API," pick <strong>Codex</strong> (that's the one tied to your subscription) — it'll open a browser login, then ask which model; pick <strong>gpt-5.4-mini</strong>.</li>
+                            <li><strong>Screen 2 — "Select Provider."</strong> Pick whichever service you already set up back in step 4. If you set up ChatGPT Plus and it then asks "OpenAI Codex" vs. "OpenAI API," you must pick <strong>OpenAI Codex</strong> — that's the one tied to your subscription. Do not pick "OpenAI API" — it's pay-per-use and needs a separate key, which isn't what you set up. It'll open a browser login, then ask which model; pick <strong>gpt-5.4-mini</strong>.</li>
                             <li><strong>Screen 3 — "Select Terminal Backend."</strong> Keep the default, <strong>Local</strong>.</li>
                             <li><strong>Screen 4</strong> — a Slack/Discord/iMessage-style setup screen. Press <strong>Esc</strong> to skip it entirely — that's a separate decision for later.</li>
                             <li><strong>Screen 5 — "Tools for CLI."</strong> Accept the preselected defaults.</li>
                             <li><strong>Screen 6 — "Browser."</strong> Pick <strong>Local Browser</strong>.</li>
-                            <li><strong>Screen 7</strong> — another, unlabeled provider choice (likely the image/vision slot). Pick whichever provider you already authenticated at Screen 2. If it then asks for a model tier, accept the default ("medium").</li>
+                            <li><strong>Screen 7</strong> — another, unlabeled provider choice (likely the image/vision slot). Pick whichever provider you already authenticated at Screen 2 — if that was ChatGPT Plus, pick <strong>OpenAI Codex</strong> again here too. If it then asks for a model tier, accept the default ("medium").</li>
                             <li><strong>Screen 8 — "TTS."</strong> Keep the recommended default, <strong>Microsoft Edge TTS</strong>.</li>
                             <li><strong>Screen 9</strong> — search provider. Pick <strong>DuckDuckGo</strong> (free, no API key needed). If you didn't set up a paid subscription but did enter an OpenRouter or NVIDIA key in step 4, pick that one instead. If you haven't set anything up yet, pick OpenRouter — you'll finish that account in a later step regardless.</li>
                         </ul>
