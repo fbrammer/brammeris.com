@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Set up your AI assistant</title>
+<style>
+    :root {
+        --bg: #ffffff;
+        --fg: #1c1c1c;
+        --muted: #5a5a5a;
+        --accent: #2c3e50;
+        --border: #ddd;
+        --card-bg: #fafafa;
+        --code-bg: #1e1e1e;
+        --code-fg: #e8e8e8;
+        --callout-bg: #fff8e1;
+        --callout-fg: #3a2f00;
+        --callout-border: #f1c40f;
+        --warn-bg: #fdecea;
+        --warn-fg: #611a15;
+        --warn-border: #e74c3c;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --bg: #16181c;
+            --fg: #e8e8e8;
+            --muted: #a0a0a0;
+            --accent: #6fa8dc;
+            --border: #3a3d42;
+            --card-bg: #1e2126;
+            --code-bg: #0f1113;
+            --code-fg: #e8e8e8;
+            --callout-bg: #332b00;
+            --callout-fg: #f1e6a8;
+            --callout-border: #f1c40f;
+            --warn-bg: #3a1a17;
+            --warn-fg: #f5c6c0;
+            --warn-border: #e74c3c;
+        }
+    }
+    :root[data-theme="dark"] {
+        --bg: #16181c;
+        --fg: #e8e8e8;
+        --muted: #a0a0a0;
+        --accent: #6fa8dc;
+        --border: #3a3d42;
+        --card-bg: #1e2126;
+        --code-bg: #0f1113;
+        --code-fg: #e8e8e8;
+        --callout-bg: #332b00;
+        --callout-fg: #f1e6a8;
+        --callout-border: #f1c40f;
+        --warn-bg: #3a1a17;
+        --warn-fg: #f5c6c0;
+        --warn-border: #e74c3c;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.55;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header.hero { padding: 2.5rem 0 1rem; }
+    h1 { margin: 0 0 0.75rem; font-size: 1.7rem; }
+    .lede { color: var(--muted); font-size: 1.02rem; }
+    .step-card {
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 1.25rem 1.4rem;
+        margin: 1.4rem 0;
+    }
+    .step-card h2 {
+        margin: 0 0 0.6rem;
+        font-size: 1.15rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+    .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.7rem; height: 1.7rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        font-weight: bold;
+        font-size: 0.9rem;
+        flex: none;
+    }
+    pre {
+        background: var(--code-bg);
+        color: var(--code-fg);
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        margin: 0.7rem 0;
+    }
+    code { font-family: "SF Mono", Menlo, Consolas, monospace; }
+    .callout {
+        background: var(--callout-bg);
+        color: var(--callout-fg);
+        border-left: 4px solid var(--callout-border);
+        padding: 0.75rem 1rem;
+        margin: 0.9rem 0;
+        font-size: 0.94rem;
+        border-radius: 4px;
+    }
+    .callout-warn {
+        background: var(--warn-bg);
+        color: var(--warn-fg);
+        border-left: 4px solid var(--warn-border);
+    }
+    .os-toggle { margin: 0.9rem 0; }
+    .os-toggle button, .fallback-choice label {
+        font-size: 0.92rem;
+    }
+    .os-toggle button {
+        padding: 0.45rem 1.1rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.4rem;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--fg);
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .os-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    label { display: block; margin: 0.5rem 0; font-size: 0.95rem; }
+    input[type="text"] {
+        padding: 0.5rem 0.7rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 0.92rem;
+        width: 100%;
+        max-width: 440px;
+        font-family: "SF Mono", Menlo, Consolas, monospace;
+        background: var(--bg);
+        color: var(--fg);
+    }
+    .fallback-choice { margin: 0.3rem 0; }
+    .fallback-choice input { margin-right: 0.5rem; }
+    .hash-row { font-size: 0.85rem; word-break: break-all; margin: 0.35rem 0; }
+    .hash-row .os-name { display: inline-block; min-width: 5.5rem; font-weight: 600; }
+    button.action {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.95rem;
+        border-radius: 6px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #fff;
+        cursor: pointer;
+    }
+    button.action:hover { opacity: 0.9; }
+    footer.section {
+        border-top: 1px solid var(--border);
+        margin-top: 2rem;
+        padding-top: 1rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+    }
+    a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main class="container">
+
+    <header class="hero">
+        <h1>Set up your AI assistant</h1>
+        <p class="lede">You are about to set up an AI assistant on your own computer.
+        Two of the three things we do here are ordinary — install a program, connect
+        it to some AI models. The third is the one that matters: we build you a set of
+        folders and notes that the assistant reads to know who you are, what you're
+        working on, and where everything lives. That's its memory. Programs and AI
+        models get replaced every few months; the folders are yours and they last.
+        Everything stays on your computer.</p>
+    </header>
+
+    <section class="step-card" id="step-1">
+        <h2><span class="step-num">1</span>What you'll need</h2>
+        <p>About 10 minutes, an internet connection, and the ability to install a
+        program on your computer. This works on Mac, Windows, and Linux.</p>
+        <div class="os-toggle" id="os-toggle">
+            <strong>Which computer are you on?</strong><br>
+            <button id="btn-mac" onclick="selectOS('mac')">Mac</button>
+            <button id="btn-windows" onclick="selectOS('windows')">Windows</button>
+            <button id="btn-linux" onclick="selectOS('linux')">Linux</button>
+        </div>
+        <p class="lede" id="os-detected"></p>
+    </section>
+
+    <section class="step-card" id="step-2">
+        <h2><span class="step-num">2</span>Pick your AI connection</h2>
+        <p>Your assistant's main connection is a free OpenAI/Codex sign-in, done in
+        your browser when the installer runs — no key to copy. On top of that, you can
+        enable free fallback providers (OpenRouter, NVIDIA) so your assistant can keep
+        working if the main connection is briefly unavailable. Free accounts with each
+        give you a key you'll paste in later.</p>
+        <p><strong>You won't type any password or key into this page.</strong> When the
+        time comes, you'll enter them into a window that opens on your own computer and
+        talks to nobody but the installer.</p>
+        <div class="fallback-choice">
+            <label><input type="checkbox" id="fallback-openrouter" checked onchange="renderEnvPreview()"> OpenRouter (free fallback)</label>
+            <label><input type="checkbox" id="fallback-nvidia" checked onchange="renderEnvPreview()"> NVIDIA (free fallback)</label>
+        </div>
+    </section>
+
+    <section class="step-card" id="step-3">
+        <h2><span class="step-num">3</span>Choose where your assistant lives</h2>
+        <p>Your assistant keeps everything in one folder on your computer. Most people
+        leave this alone. If you keep your files somewhere unusual — an external drive,
+        a synced folder — you can change it.</p>
+        <label for="base-path">Base folder</label>
+        <input type="text" id="base-path" oninput="checkBasePath(); renderEnvPreview();">
+        <p class="lede">You can move it later; the assistant will find it.</p>
+        <div class="callout callout-warn" id="cloud-sync-warning" style="display:none;">
+            This path looks like it's inside a cloud-sync folder (Dropbox, OneDrive,
+            iCloud Drive, or Google Drive). That is allowed, but sync tools and version
+            control sometimes disagree about the same files at the same time, which can
+            look like a confusing conflict later. It will still work — this is a
+            heads-up, not a block.
+        </div>
+    </section>
+
+    <section class="step-card" id="step-4">
+        <h2><span class="step-num">4</span>Download your two files</h2>
+        <p>This step downloads <code>env.txt</code>, a small text file with your base
+        folder path, chosen operating system, enabled fallback providers, and this
+        page's version — <strong>no credentials of any kind</strong> — plus the zip file
+        for your operating system.</p>
+        <p>A file called <code>env.txt</code> can look alarming if you're being careful,
+        and meaningless if you're not. Here's exactly what's in yours:</p>
+        <pre><code id="env-preview"></code></pre>
+        <p><button class="action" onclick="downloadEnvTxt()">Download env.txt</button></p>
+        <p>Now download the zip for your operating system:</p>
+        <p id="zip-links"></p>
+    </section>
+
+    <section class="step-card" id="step-5">
+        <h2><span class="step-num">5</span>Unzip and run</h2>
+        <p>Unzip the file you downloaded, then run the setup script inside it
+        (<code>aia-setup.sh</code> on Mac and Linux, <code>aia-setup.ps1</code> on
+        Windows).</p>
+        <div class="callout callout-warn">
+            <strong>Windows will probably warn you.</strong> When you run the installer,
+            Windows may show a blue box saying "Windows protected your PC — unrecognized publisher."
+            That is expected. It appears for any program that hasn't paid
+            for a commercial signing certificate, which this one hasn't. It is not a
+            virus warning and Windows has not found anything wrong with the file. Click
+            <strong>More info</strong>, then <strong>Run anyway</strong>.
+        </div>
+        <p>Mac users see a similar, milder message: right-click the installer and choose
+        Open.</p>
+        <p>If you would rather check first, here is the SHA-256 fingerprint of each
+        zip. You can compare it against what you downloaded using any checksum tool.</p>
+        <div class="hash-row"><span class="os-name">Mac:</span> <code>70546559b41dc7e61014b9be1704470f002742fc3332720acbd3e7a89de9901f</code></div>
+        <div class="hash-row"><span class="os-name">Windows:</span> <code>097a0c12068208269951c444ec3efe1aa65d2248a764efb4114b8f71801ffdb4</code></div>
+        <div class="hash-row"><span class="os-name">Linux:</span> <code>e22ef28ae9434b3eafddf0957075e2f9edca8e77175c7e7ab318fa5b070c5d4d</code></div>
+        <p class="lede">This is the only honest answer to "how do I know this is safe"
+        available without a paid code-signing certificate.</p>
+    </section>
+
+    <section class="step-card" id="step-6">
+        <h2><span class="step-num">6</span>What happens next</h2>
+        <p>Here is a short preview of what the script does on its own, so nothing in the
+        terminal is a surprise: it makes your folder, installs Hermes, opens your
+        browser twice — once to sign in to OpenAI, once to a small page on your own
+        computer for your backup keys — then gives you a sentence to paste.</p>
+        <p>The OpenAI sign-in happens in a normal browser tab, the same as signing into
+        any other website. The backup-keys page runs only on your own computer and is
+        gone the moment the script closes it.</p>
+    </section>
+
+    <section class="step-card" id="step-7">
+        <h2><span class="step-num">7</span>Meet your assistant</h2>
+        <p>Once the script finishes, it hands you a message to paste. From there you're
+        talking to the assistant, and it takes over. Expect onboarding to continue as a
+        conversation for another 20 minutes or so — nothing left to click through on
+        this page.</p>
+    </section>
+
+    <footer class="section">
+        <strong>If something goes wrong:</strong> re-running the installer is always
+        safe — nothing gets deleted, and it picks up wherever it left off. Run the same
+        script again with a check flag (shown at the top of its own output) to have it
+        re-check everything and report what it finds. There is no support email for
+        this page; the re-run command above is the fix for almost everything.
+    </footer>
+
+</main>
+
+<script>
+    const env_keys = ["base_path", "os", "fallbacks", "page_version"];
+    const PAGE_VERSION = "1";
+
+    const osDefaults = {
+        mac: "/Users/you/AI",
+        windows: "C:\\Users\\you\\AI",
+        linux: "/home/you/AI"
+    };
+
+    const cloudSyncMarkers = ["dropbox", "onedrive", "icloud", "google drive", "googledrive"];
+
+    let currentOS = "mac";
+
+    function detectOS() {
+        const platform = (navigator.platform || navigator.userAgent || "").toLowerCase();
+        if (platform.includes("win")) return "windows";
+        if (platform.includes("linux")) return "linux";
+        return "mac";
+    }
+
+    function selectOS(osName) {
+        currentOS = osName;
+        ["mac", "windows", "linux"].forEach(function (name) {
+            document.getElementById("btn-" + name).classList.toggle("active", name === osName);
+        });
+        document.getElementById("base-path").value = osDefaults[osName];
+        checkBasePath();
+        renderZipLinks();
+        renderEnvPreview();
+    }
+
+    function checkBasePath() {
+        const value = document.getElementById("base-path").value.toLowerCase();
+        const warning = document.getElementById("cloud-sync-warning");
+        const matched = cloudSyncMarkers.some(function (marker) { return value.includes(marker); });
+        warning.style.display = matched ? "block" : "none";
+    }
+
+    function renderZipLinks() {
+        document.getElementById("zip-links").innerHTML =
+            '<a href="./aia-' + currentOS + '.zip">Download aia-' + currentOS + '.zip</a>';
+    }
+
+    function enabledFallbacks() {
+        const fallbacks = [];
+        if (document.getElementById("fallback-openrouter").checked) fallbacks.push("openrouter");
+        if (document.getElementById("fallback-nvidia").checked) fallbacks.push("nvidia");
+        return fallbacks;
+    }
+
+    function envTxtContents() {
+        const values = {
+            base_path: document.getElementById("base-path").value || osDefaults[currentOS],
+            os: currentOS,
+            fallbacks: enabledFallbacks().join(","),
+            page_version: PAGE_VERSION
+        };
+        return env_keys.map(function (key) { return key + "=" + values[key]; }).join("\n") + "\n";
+    }
+
+    function renderEnvPreview() {
+        document.getElementById("env-preview").textContent = envTxtContents();
+    }
+
+    function downloadEnvTxt() {
+        const blob = new Blob([envTxtContents()], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "env.txt";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const detected = detectOS();
+        document.getElementById("os-detected").textContent =
+            "We detected " + detected + " — click a different button above if that's wrong.";
+        selectOS(detected);
+    });
+</script>
+</body>
+</html>
