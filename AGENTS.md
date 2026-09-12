@@ -29,3 +29,15 @@ Read [[../../Standards/COMM_STANDARD.md]] and follow it in every response.
 - Preserve the blue/red brand palette unless the user asks for a redesign.
 - Update `contact.html` carefully if the Formspree destination changes.
 - If a change affects deployment, validate it locally first and then follow `SETUP.md`.
+
+<!-- Moved from ROUTING.md during the routing-index migration. -->
+
+## Workflow
+
+- Use `AGENTS.md` for day-to-day workspace instructions.
+- Use `SETUP.md` when deploying or changing the contact form.
+- Keep site edits local and review in the browser before publishing.
+
+---
+
+**Navigation**: This folder is the website workspace for BrammerIS.
