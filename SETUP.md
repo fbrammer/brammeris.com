@@ -2,7 +2,7 @@
 
 This folder contains the BrammerIS website: landing page, about page, and contact form.
 
-See also [[BrammerIS/2026-06-13-website-modernization-plan|the website modernization plan]].
+See also [the website modernization plan](2026-06-13-website-modernization-plan.md).
 
 ## Files
 
